@@ -1,17 +1,49 @@
 import React from 'react';
 
 const Pokemon = (props) => (
-  <div>
-    <h1>{ props.name } #{ props.id }</h1>
-    <h2>{ props.species }</h2>
-    <img src="app/assets/images/bulbasaur.jpg" />
-    <h2>Pokédex</h2>
-    <ul>
-      <li><strong>Type</strong> { props.type.join(', ') } </li>
-      <li><strong>Height</strong> { props.height } </li>
-      <li><strong>Weight</strong> { props.weight } </li>
-      <li><strong>Abilities</strong> { props.abilities.join(', ') } </li>
-    </ul>
+
+  <div className="container">
+    <div className="page-header">
+      <h1>
+        { props.name } 
+        <small> { props.species } </small>
+        <span className="label label-primary pull-right">#{ props.id }</span>
+      </h1>
+    </div>
+    <div className="row">
+      <div className="col-md-6">
+        <img className="avatar center-block" src={ `app/assets/images/pokemons/${ props.name.toLowerCase() }.jpg` } />
+      </div>
+      <div className="col-md-6">
+        <ul className="nav nav-tabs nav-justified">
+          <li className="active"><a href="#">Pokédex</a></li>
+          <li><a href="#">Stats</a></li>
+          <li><a href="#">Evolution</a></li>
+        </ul>
+        <div className="tab-content">
+          <div>
+            <ul className="list-group">
+              <li className="list-group-item">
+                <strong>Type</strong>
+                <span className="pull-right">{ props.type.join(', ') }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Height</strong>
+                <span className="pull-right">{ props.height }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Weight</strong>
+                <span className="pull-right">{ props.weight }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Abilities</strong>
+                <span className="pull-right">{ props.abilities.join(', ') }</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 )
 

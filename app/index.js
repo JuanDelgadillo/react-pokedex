@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Pokemon from './components/Pokemon';
+import Main from './components/Main';
 
 ReactDOM.render(
-  <Pokemon />,
+  <Main />,
   document.getElementById('app')
 );
