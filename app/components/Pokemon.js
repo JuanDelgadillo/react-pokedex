@@ -57,6 +57,62 @@ const Pokemon = (props) => (
               </li>
             </ul>
           </div>
+
+
+          <div>
+            <ul className="list-group">
+              <li className="list-group-item">
+                <strong>HP</strong>
+                <span className="badge">{ props.stats.hp }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Attack</strong>
+                <span className="badge">{ props.stats.attack }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Defense</strong>
+                <span className="badge">{ props.stats.defense }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Special Attack</strong>
+                <span className="badge">{ props.stats['sp.atk'] }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Special Defense</strong>
+                <span className="badge">{ props.stats['sp.def'] }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Speed</strong>
+                <span className="badge">{ props.stats.speed }</span>
+              </li>
+              <li className="list-group-item">
+                <strong>Total</strong>
+                <span className="badge">{ props.stats.total }</span>
+              </li>
+            </ul>
+          </div>
+
+          
+          <div>
+            {
+              props.evolution.map((evolution, index) =>(
+                <div className="text-center" key={ index }>
+                  <a href="#">
+                    <img src={ `app/assets/images/pokemons/${ evolution.toLowerCase() }.jpg` } width="160" />
+                    <p>
+                      <strong>{ evolution }</strong>
+                    </p>
+                  </a>
+                  { index !== props.evolution.length -1 &&
+                    <span className="glyphicon glyphicon-arrow-down"></span>
+                  }
+                </div>
+                )
+              )
+            }
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -70,7 +126,17 @@ Pokemon.defaultProps = {
   type: [ "Grass", "Poison" ],
   height: "2′4″ (0.71m)",
   weight: "15.2 lbs (6.9 kg)",
-  abilities: [ "Overgrow", "Chlorophyll"]
+  abilities: [ "Overgrow", "Chlorophyll"],
+  stats: {
+    hp: 45,
+    attack: 49,
+    defense: 49,
+    "sp.atk": 65,
+    "sp.def": 65,
+    speed: 45,
+    total: 318
+  },
+  evolution: [ "Bulbasaur", "Ivysaur", "Venusaur" ]
 }
 
 export default Pokemon;
