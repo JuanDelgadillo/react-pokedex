@@ -25,7 +25,16 @@ const Pokemon = (props) => (
             <ul className="list-group">
               <li className="list-group-item">
                 <strong>Type</strong>
-                <span className="pull-right">{ props.type.join(', ') }</span>
+                <span className="pull-right">
+                  {
+                    props.type.map((type, index) => (
+                      <span className={ `label type type-${ type.toLowerCase() }` } key={index} >
+                        { type }
+                      </span>
+                      )
+                    )
+                  }
+                </span>
               </li>
               <li className="list-group-item">
                 <strong>Height</strong>
@@ -37,7 +46,14 @@ const Pokemon = (props) => (
               </li>
               <li className="list-group-item">
                 <strong>Abilities</strong>
-                <span className="pull-right">{ props.abilities.join(', ') }</span>
+                <ul>
+                  {
+                    props.abilities.map((ability, index) => (
+                        <li key={index}>{ ability }</li>
+                      )
+                    )
+                  }
+                </ul>
               </li>
             </ul>
           </div>

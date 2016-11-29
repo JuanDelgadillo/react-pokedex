@@ -10,7 +10,7 @@ const PokedexNavbar = () => (
           <span className="icon-bar"></span>
           <span className="icon-bar"></span>
         </button>
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           <img src="app/assets/images/logo.png" />
           Pokédex
         </a>
