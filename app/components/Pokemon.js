@@ -14,7 +14,7 @@ class Pokemon extends Component {
 
   render () {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="page-header">
           <h1>
             { this.props.name } 
@@ -134,6 +134,49 @@ class Pokemon extends Component {
             </div>
           </div>
         </div>
+
+
+
+        <button className="btn btn-primary">Show comments <span className="badge">2</span></button>
+        <div className="panel panel-primary">
+          <div className="panel-heading">
+            <h1 className="panel-title">Comments <button className="close pull-right">&times;</button></h1>
+          </div>
+          <div className="panel-body">
+            <form className="form-horizontal" role="form">
+              <div className="form-group">
+                <div className="col-sm-6">
+                  <textarea placeholder={ `Please tell us what do you think about ${ this.props.name } ` } className="form-control"></textarea>
+                </div>
+                <div className="col-sm-4">
+                  <input type="email" placeholder="Please enter your email address" className="form-control" />
+                  <label>
+                    <input id="anonymous" type="checkbox" />
+                    Anonymous
+                  </label>
+                </div>
+                <div className="col-sm-2">
+                  <button className="btn btn-lg">Comment</button>
+                </div>
+              </div>
+            </form>
+            <blockquote>
+              <p>OMG Bulbasaur is AMAZING!!!</p>
+              <footer>
+                Comment by <a href="mailto:pepe@pepe.com">pepe@pepe.com</a> on <span>Sep 12, 2014, 11:00:00 PM</span>
+              </footer>
+            </blockquote>
+            <blockquote>
+              <p>Nah, I hate it -_-</p>
+              <footer>
+                Comment by <em>Anonymous</em> on <span>Sep 12, 2014, 11:00:00 PM</span>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+
+
+
       </div>
     )
   }
