@@ -5,11 +5,38 @@ class Comment extends Component {
     super();
     this.state = {
       showComments: false,
+      comment: {
+        body: '',
+        email: '',
+        anonymous: false
+      },
       comments: []
     }
+    this.handleCommentAnonymousChange = this.handleCommentAnonymousChange.bind(this);
+    this.handleCommentBodyChange = this.handleCommentBodyChange.bind(this);
+    this.handleCommentEmailChange = this.handleCommentEmailChange.bind(this);
+  }
+
+  handleCommentBodyChange (event) {
+    this.setState({
+      comment: Object.assign(this.state.comment, { body: event.target.value })
+    });
+  }
+
+  handleCommentEmailChange (event) {
+    this.setState({
+      comment: Object.assign(this.state.comment, { email: event.target.value })
+    });
+  }
+
+  handleCommentAnonymousChange (event) {
+    this.setState({
+      comment: Object.assign(this.state.comment, { anonymous: event.target.checked })
+    });
   }
 
   toggle () {
+    console.log(this.state)
     this.setState({
       showComments: !this.state.showComments
     });
@@ -30,12 +57,12 @@ class Comment extends Component {
               <form className="form-horizontal" role="form">
                 <div className="form-group">
                   <div className="col-sm-6">
-                    <textarea placeholder={ `Please tell us what do you think about ${ this.props.pokemonName } ` } className="form-control"></textarea>
+                    <textarea value={ this.state.comment.body } onChange={ this.handleCommentBodyChange } placeholder={ `Please tell us what do you think about ${ this.props.pokemonName } ` } className="form-control"></textarea>
                   </div>
                   <div className="col-sm-4">
-                    <input type="email" placeholder="Please enter your email address" className="form-control" />
+                    <input type="email" value={ this.state.comment.email } onChange={ this.handleCommentEmailChange } placeholder="Please enter your email address" className="form-control" />
                     <label>
-                      <input id="anonymous" type="checkbox" />
+                      <input id="anonymous" checked={ this.state.comment.anonymous } onChange={ this.handleCommentAnonymousChange } type="checkbox" />
                       Anonymous
                     </label>
                   </div>
