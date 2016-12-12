@@ -46,7 +46,7 @@ class Comment extends Component {
     return (
       <div>
         { !this.state.showComments &&
-          <button className="btn btn-primary" onClick={ () => this.toggle() }>Show comments <span className="badge">2</span></button>
+          <button className="btn btn-primary" onClick={ () => this.toggle() }>Show comments <span className="badge">{ this.state.comments.length }</span></button>
         }
         { this.state.showComments &&
           <div className="panel panel-primary">
@@ -60,7 +60,7 @@ class Comment extends Component {
                     <textarea value={ this.state.comment.body } onChange={ this.handleCommentBodyChange } placeholder={ `Please tell us what do you think about ${ this.props.pokemonName } ` } className="form-control"></textarea>
                   </div>
                   <div className="col-sm-4">
-                    <input type="email" value={ this.state.comment.email } onChange={ this.handleCommentEmailChange } placeholder="Please enter your email address" className="form-control" />
+                    <input type="email" value={ this.state.comment.email } disabled={ this.state.comment.anonymous } onChange={ this.handleCommentEmailChange } placeholder="Please enter your email address" className="form-control" />
                     <label>
                       <input id="anonymous" checked={ this.state.comment.anonymous } onChange={ this.handleCommentAnonymousChange } type="checkbox" />
                       Anonymous
@@ -74,7 +74,17 @@ class Comment extends Component {
               <blockquote>
                 <p>OMG Bulbasaur is AMAZING!!!</p>
                 <footer>
-                  Comment by <a href="mailto:pepe@pepe.com">pepe@pepe.com</a> on <span>Sep 12, 2014, 11:00:00 PM</span>
+                  Comment by
+
+                  { !this.state.comment.anonymous &&
+                    <a href={ `mailto:${ this.state.comment.email }` }> { this.state.comment.email } </a>
+                  }
+
+                  { this.state.comment.anonymous &&
+                    <em> Anonymous </em> 
+                  }
+
+                   on <span>{ this.state.comment.date }</span>
                 </footer>
               </blockquote>
               <blockquote>
