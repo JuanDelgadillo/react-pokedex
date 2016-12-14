@@ -31,7 +31,7 @@ class Comment extends Component {
 
   handleCommentAnonymousChange (event) {
     this.setState({
-      comment: Object.assign(this.state.comment, { anonymous: event.target.checked })
+      comment: Object.assign(this.state.comment, { anonymous: event.target.checked, email: '' })
     });
   }
 
