@@ -70,10 +70,10 @@ class Comment extends Component {
               <form className="form-horizontal" onSubmit={ this.addComment } role="form">
                 <div className="form-group">
                   <div className="col-sm-6">
-                    <textarea value={ this.state.comment.body } onChange={ this.handleCommentBodyChange } placeholder={ `Please tell us what do you think about ${ this.props.pokemonName } ` } className="form-control"></textarea>
+                    <textarea value={ this.state.comment.body } onChange={ this.handleCommentBodyChange } placeholder={ `Please tell us what do you think about ${ this.props.pokemonName } ` } className="form-control" required></textarea>
                   </div>
                   <div className="col-sm-4">
-                    <input type="email" value={ this.state.comment.email } disabled={ this.state.comment.anonymous } onChange={ this.handleCommentEmailChange } placeholder="Please enter your email address" className="form-control" />
+                    <input type="email" required={ !this.state.comment.anonymous } value={ this.state.comment.email } disabled={ this.state.comment.anonymous } onChange={ this.handleCommentEmailChange } placeholder="Please enter your email address" className="form-control" />
                     <label>
                       <input id="anonymous" checked={ this.state.comment.anonymous } onChange={ this.handleCommentAnonymousChange } type="checkbox" />
                       Anonymous
