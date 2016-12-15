@@ -6,6 +6,7 @@ class Comment extends Component {
     this.state = {
       showComments: false,
       comment: {
+        date: '',
         body: '',
         email: '',
         anonymous: false
@@ -20,12 +21,12 @@ class Comment extends Component {
 
   addComment (event) {
     event.preventDefault();
-
-    this.state.comments.push(this.state.comment)
+    this.state.comment.date = new Date().toDateString();
+    this.state.comments.push(this.state.comment);
 
     this.setState({
       comments: this.state.comments,
-      comment: { body: '', email: '', anonymous: false }
+      comment: { date: '', body: '', email: '', anonymous: false }
     });
   }
 
