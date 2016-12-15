@@ -15,6 +15,18 @@ class Comment extends Component {
     this.handleCommentAnonymousChange = this.handleCommentAnonymousChange.bind(this);
     this.handleCommentBodyChange = this.handleCommentBodyChange.bind(this);
     this.handleCommentEmailChange = this.handleCommentEmailChange.bind(this);
+    this.addComment = this.addComment.bind(this);
+  }
+
+  addComment (event) {
+    event.preventDefault();
+
+    this.state.comments.push(this.state.comment)
+
+    this.setState({
+      comments: this.state.comments,
+      comment: { body: '', email: '', anonymous: false }
+    });
   }
 
   handleCommentBodyChange (event) {
@@ -54,7 +66,7 @@ class Comment extends Component {
               <h1 className="panel-title">Comments <button className="close pull-right" onClick={ () => this.toggle() }>&times;</button></h1>
             </div>
             <div className="panel-body">
-              <form className="form-horizontal" role="form">
+              <form className="form-horizontal" onSubmit={ this.addComment } role="form">
                 <div className="form-group">
                   <div className="col-sm-6">
                     <textarea value={ this.state.comment.body } onChange={ this.handleCommentBodyChange } placeholder={ `Please tell us what do you think about ${ this.props.pokemonName } ` } className="form-control"></textarea>
@@ -71,28 +83,26 @@ class Comment extends Component {
                   </div>
                 </div>
               </form>
-              <blockquote>
-                <p>OMG Bulbasaur is AMAZING!!!</p>
-                <footer>
-                  Comment by
+              {
+                this.state.comments.map((comment, index) => (
+                  <blockquote key={ index }>
+                    <p> { comment.body } </p>
+                    <footer>
+                      Comment by
 
-                  { !this.state.comment.anonymous &&
-                    <a href={ `mailto:${ this.state.comment.email }` }> { this.state.comment.email } </a>
-                  }
+                      { !comment.anonymous &&
+                        <a href={ `mailto:${ comment.email }` }> { comment.email } </a>
+                      }
 
-                  { this.state.comment.anonymous &&
-                    <em> Anonymous </em> 
-                  }
+                      { comment.anonymous &&
+                        <em> Anonymous </em> 
+                      }
 
-                   on <span>{ this.state.comment.date }</span>
-                </footer>
-              </blockquote>
-              <blockquote>
-                <p>Nah, I hate it -_-</p>
-                <footer>
-                  Comment by <em>Anonymous</em> on <span>Sep 12, 2014, 11:00:00 PM</span>
-                </footer>
-              </blockquote>
+                       on <span>{ comment.date }</span>
+                    </footer>
+                  </blockquote>
+                ))
+              }
             </div>
           </div>
         }
