@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import Comment from './Comment';
+
+import PokemonHeaderInformation from './PokemonHeaderInformation';
+import PokemonEvolution from './PokemonEvolution';
+import PokemonImage from './PokemonImage';
+import PokemonStats from './PokemonStats';
 import PokemonData from './PokemonData';
+import Comment from './Comment';
 
 class Pokemon extends Component {
   constructor () {
@@ -18,15 +23,11 @@ class Pokemon extends Component {
     return (
       <div className="container-fluid">
         <div className="page-header">
-          <h1>
-            { this.props.name } 
-            <small> { this.props.species } </small>
-            <span className="label label-primary pull-right">#{ this.props.id }</span>
-          </h1>
+          <PokemonHeaderInformation id={ this.props.id } name={ this.props.name } species={ this.props.species } />
         </div>
         <div className="row">
           <div className="col-md-6">
-            <img className="avatar center-block" src={ `app/assets/images/pokemons/${ this.props.name.toLowerCase() }.jpg` } />
+            <PokemonImage name={ this.props.name } />
           </div>
           <div className="col-md-6">
             <ul className="nav nav-tabs nav-justified">
@@ -35,69 +36,18 @@ class Pokemon extends Component {
               <li className={ this.state.tabSelected === 3 && 'active' }><a href="#" onClick={ () => this.selectTab(3) }>Evolution</a></li>
             </ul>
             <div className="tab-content">
-            { this.state.tabSelected === 1 &&
-              <PokemonData type={ this.props.type } abilities={ this.props.abilities } height={ this.props.height } weight={ this.props.weight } />
-            }
+              { this.state.tabSelected === 1 &&
+                <PokemonData type={ this.props.type } abilities={ this.props.abilities } height={ this.props.height } weight={ this.props.weight } />
+              }
 
+              { this.state.tabSelected === 2 &&
+                <PokemonStats stats={ this.props.stats } />
+              }
 
-            { this.state.tabSelected === 2 &&
-              <div>
-                <ul className="list-group">
-                  <li className="list-group-item">
-                    <strong>HP</strong>
-                    <span className="badge">{ this.props.stats.hp }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Attack</strong>
-                    <span className="badge">{ this.props.stats.attack }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Defense</strong>
-                    <span className="badge">{ this.props.stats.defense }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Special Attack</strong>
-                    <span className="badge">{ this.props.stats['sp.atk'] }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Special Defense</strong>
-                    <span className="badge">{ this.props.stats['sp.def'] }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Speed</strong>
-                    <span className="badge">{ this.props.stats.speed }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Total</strong>
-                    <span className="badge">{ this.props.stats.total }</span>
-                  </li>
-                </ul>
-              </div>
-            }
-
-           { this.state.tabSelected === 3 &&
-              <div>
-                {
-                  this.props.evolution.map((evolution, index) =>(
-                    <div className="text-center" key={ index }>
-                      <a href="#">
-                        <img src={ `app/assets/images/pokemons/${ evolution.toLowerCase() }.jpg` } width="160" />
-                        <p>
-                          <strong>{ evolution }</strong>
-                        </p>
-                      </a>
-                      { index !== this.props.evolution.length -1 &&
-                        <span className="glyphicon glyphicon-arrow-down"></span>
-                      }
-                    </div>
-                    )
-                  )
-                }
-              </div>
-           } 
+              { this.state.tabSelected === 3 &&
+                <PokemonEvolution evolution={ this.props.evolution } />
+              } 
               
-
-
             </div>
           </div>
         </div>
