@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
+import PokemonData from './PokemonData';
 
 class Pokemon extends Component {
   constructor () {
@@ -35,42 +36,7 @@ class Pokemon extends Component {
             </ul>
             <div className="tab-content">
             { this.state.tabSelected === 1 &&
-              <div>
-                <ul className="list-group">
-                  <li className="list-group-item">
-                    <strong>Type</strong>
-                    <span className="pull-right">
-                      {
-                        this.props.type.map((type, index) => (
-                          <span className={ `label type type-${ type.toLowerCase() }` } key={index} >
-                            { type }
-                          </span>
-                          )
-                        )
-                      }
-                    </span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Height</strong>
-                    <span className="pull-right">{ this.props.height }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Weight</strong>
-                    <span className="pull-right">{ this.props.weight }</span>
-                  </li>
-                  <li className="list-group-item">
-                    <strong>Abilities</strong>
-                    <ul>
-                      {
-                        this.props.abilities.map((ability, index) => (
-                            <li key={index}>{ ability }</li>
-                          )
-                        )
-                      }
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+              <PokemonData type={ this.props.type } abilities={ this.props.abilities } height={ this.props.height } weight={ this.props.weight } />
             }
 
 
