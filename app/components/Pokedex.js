@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { getPokemons } from '../utils/pokemonHelpers';
 import PokemonImage from './PokemonImage';
+import PokemonHeaderInformation from './PokemonHeaderInformation';
 
 export default class Pokedex extends Component {
   constructor () {
@@ -27,7 +28,7 @@ export default class Pokedex extends Component {
         {
           this.state.pokemons.map((pokemon, index) => (
             <div key={ index }>
-              <h1> { pokemon.name } <small>{ pokemon.species }</small> </h1>
+              <PokemonHeaderInformation id={ pokemon.id } name={ pokemon.name } species={ pokemon.species } />
               <PokemonImage name={ pokemon.name } />
             </div>
           ))
