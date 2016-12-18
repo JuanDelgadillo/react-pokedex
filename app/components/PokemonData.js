@@ -1,4 +1,5 @@
 import React from 'react';
+import PokemonType from './PokemonType';
 
 const PokemonData = (props) => (
   <div>
@@ -6,14 +7,7 @@ const PokemonData = (props) => (
       <li className="list-group-item">
         <strong>Type</strong>
         <span className="pull-right">
-          {
-            props.type.map((type, index) => (
-              <span className={ `label type type-${ type.toLowerCase() }` } key={index} >
-                { type }
-              </span>
-              )
-            )
-          }
+          <PokemonType type={ props.type } />
         </span>
       </li>
       <li className="list-group-item">
