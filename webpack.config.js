@@ -14,6 +14,7 @@ var liveReloadPlugin = new LiveReloadPlugin({
 
 module.exports = {
   entry: [
+    'babel-polyfill',
     './app/index.js'
   ],
   output: {
