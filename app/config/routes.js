@@ -9,7 +9,7 @@ const routes = (
   <Router history={ hashHistory }>
     <Route path='/' component={ Main }>
       <IndexRoute component={ Pokedex } />
-      <Route path='pokemon/:pokemonName' component={ Pokemon } />
+      <Route path='pokemon/:name' component={ Pokemon } />
       <Route path='*' component={ Pokedex } />
     </Route>
   </Router>

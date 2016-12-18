@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 import { getPokemons } from '../utils/pokemonHelpers';
 import PokemonImage from './PokemonImage';
@@ -28,8 +29,10 @@ export default class Pokedex extends Component {
         {
           this.state.pokemons.map((pokemon, index) => (
             <div key={ index }>
-              <PokemonHeaderInformation id={ pokemon.id } name={ pokemon.name } species={ pokemon.species } />
-              <PokemonImage name={ pokemon.name } />
+              <Link to={ `pokemon/${pokemon.name}` }>
+                <PokemonHeaderInformation id={ pokemon.id } name={ pokemon.name } species={ pokemon.species } />
+                <PokemonImage name={ pokemon.name } />
+              </Link>
             </div>
           ))
         }
