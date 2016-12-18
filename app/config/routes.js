@@ -10,6 +10,7 @@ const routes = (
     <Route path='/' component={ Main }>
       <IndexRoute component={ Pokedex } />
       <Route path='pokemon/:name' component={ Pokemon } />
+      <Route path='pokemons/type/:type' component={ Pokedex } />
       <Route path='*' component={ Pokedex } />
     </Route>
   </Router>
