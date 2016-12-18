@@ -1,11 +1,10 @@
 import React from 'react';
-import Pokemon from './Pokemon';
 import PokedexNavbar from './PokedexNavbar';
 
-const Main = () => (
+const Main = (props) => (
   <div className ="main-container">
     <PokedexNavbar />
-    <Pokemon />
+    { props.children }
   </div>
 )
 

@@ -21,7 +21,7 @@ class Pokemon extends Component {
 
   render () {
     return (
-      <div className="container-fluid">
+      <div>
         <div className="page-header">
           <PokemonHeaderInformation id={ this.props.id } name={ this.props.name } species={ this.props.species } />
         </div>
@@ -31,9 +31,9 @@ class Pokemon extends Component {
           </div>
           <div className="col-md-6">
             <ul className="nav nav-tabs nav-justified">
-              <li className={ this.state.tabSelected === 1 && 'active' }><a href="#" onClick={ () => this.selectTab(1) }>Pokédex</a></li>
-              <li className={ this.state.tabSelected === 2 && 'active' }><a href="#" onClick={ () => this.selectTab(2) }>Stats</a></li>
-              <li className={ this.state.tabSelected === 3 && 'active' }><a href="#" onClick={ () => this.selectTab(3) }>Evolution</a></li>
+              <li className={ this.state.tabSelected === 1 && 'active' }><a onClick={ () => this.selectTab(1) }>Pokédex</a></li>
+              <li className={ this.state.tabSelected === 2 && 'active' }><a onClick={ () => this.selectTab(2) }>Stats</a></li>
+              <li className={ this.state.tabSelected === 3 && 'active' }><a onClick={ () => this.selectTab(3) }>Evolution</a></li>
             </ul>
             <div className="tab-content">
               { this.state.tabSelected === 1 &&
