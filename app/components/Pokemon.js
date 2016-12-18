@@ -33,13 +33,26 @@ class Pokemon extends Component {
     },
       tabSelected: 1
     }
+
   }
 
-  async componentDidMount() {
-    let pokemon = await getPokemonByName(this.props.routeParams.name)
+  dinamicPokemonChangeHandler (name) {
+    if (name === this.context.router.params.name) return;
+    this.context.router.push({
+      pathname: '/pokemon/'+ name
+    });
+    this.setPokemonByName(name);
+  }
+
+  async setPokemonByName (name) {
+    let pokemon = await getPokemonByName(name);
     this.setState({
       pokemon: pokemon
     })
+  }
+
+  async componentDidMount() {
+    this.setPokemonByName(this.props.routeParams.name)
   }
 
   selectTab (tab) {
@@ -72,7 +85,7 @@ class Pokemon extends Component {
               }
 
               { this.state.tabSelected === 3 &&
-                <PokemonEvolution evolution={ this.state.pokemon.evolution } />
+                <PokemonEvolution evolution={ this.state.pokemon.evolution } dinamicPokemonChangeHandler={ (name) => this.dinamicPokemonChangeHandler(name) } />
               } 
               
             </div>
@@ -86,24 +99,8 @@ class Pokemon extends Component {
   }
 }
 
-// Pokemon.defaultProps = {
-//   id: "001",
-//   name: "Bulbasaur",
-//   species: "Seed Pokémon",
-//   type: [ "Grass", "Poison" ],
-//   height: "2′4″ (0.71m)",
-//   weight: "15.2 lbs (6.9 kg)",
-//   abilities: [ "Overgrow", "Chlorophyll"],
-//   stats: {
-//     hp: 45,
-//     attack: 49,
-//     defense: 49,
-//     "sp.atk": 65,
-//     "sp.def": 65,
-//     speed: 45,
-//     total: 318
-//   },
-//   evolution: [ "Bulbasaur", "Ivysaur", "Venusaur" ]
-// }
+Pokemon.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
 export default Pokemon;

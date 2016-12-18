@@ -25,7 +25,7 @@ export default class Pokedex extends Component {
     return (
       <div>
         <div className="page-header">
-          <h1>Pokédex</h1>
+          <h1>Pokédex <small className="pull-right">Showing <span className="badge">{ this.state.pokemons.length }</span> Pokémons &nbsp;</small> </h1>
         </div>
         {
           this.state.pokemons.map((pokemon, index) => (
