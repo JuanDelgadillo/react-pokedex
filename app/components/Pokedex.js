@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { getPokemons } from '../utils/pokemonHelpers';
+import PokemonImage from './PokemonImage';
 
 export default class Pokedex extends Component {
   constructor () {
@@ -27,7 +28,7 @@ export default class Pokedex extends Component {
           this.state.pokemons.map((pokemon, index) => (
             <div key={ index }>
               <h1> { pokemon.name } <small>{ pokemon.species }</small> </h1>
-              <img src={ `app/assets/images/pokemons/${ pokemon.name.toLowerCase() }.jpg` } />
+              <PokemonImage name={ pokemon.name } />
             </div>
           ))
         }
