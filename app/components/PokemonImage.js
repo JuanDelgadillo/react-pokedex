@@ -1,6 +1,8 @@
 import React from 'react';
 
 const PokemonImage = (props) => {
+  if (!props.name) return null
+
   let pokemonName = props.name
                     .replace('♀', 'f')
                     .replace('♂', 'm')
