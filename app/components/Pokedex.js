@@ -17,11 +17,11 @@ export default class Pokedex extends Component {
     this.pokemonType = null;
   }
 
-  async componentDidMount() {
+  async pokemonData (pokemonType) {
     let pokemons;
-    this.pokemonType = this.context.router.params.type;
-    if (this.pokemonType) {
-      pokemons = await getPokemonsByType(this.pokemonType);
+
+    if (pokemonType) {
+      pokemons = await getPokemonsByType(pokemonType);
     } else {
       pokemons = await getPokemons();
     }
@@ -30,6 +30,16 @@ export default class Pokedex extends Component {
       pokemons: pokemons,
       groupped: this.partition(pokemons, 4)
     })
+  }
+
+  async componentWillReceiveProps(nextProps) {
+    this.pokemonType = nextProps.routeParams.type;
+    this.pokemonData(this.pokemonType);
+  }
+
+  async componentDidMount() {
+    this.pokemonType = this.context.router.params.type;
+    this.pokemonData(this.pokemonType);
   }
 
   partition (data, n) {
