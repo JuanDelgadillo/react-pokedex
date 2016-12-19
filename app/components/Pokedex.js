@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { _ } from 'underscore';
 
 import { getPokemons, getPokemonsByType } from '../utils/pokemonHelpers';
 import PokemonImage from './PokemonImage';
@@ -10,7 +11,8 @@ export default class Pokedex extends Component {
   constructor () {
     super();
     this.state = {
-      pokemons: []
+      pokemons: [],
+      groupped: []
     }
     this.pokemonType = null;
   }
@@ -25,8 +27,13 @@ export default class Pokedex extends Component {
     }
 
     this.setState({
-      pokemons: pokemons
+      pokemons: pokemons,
+      groupped: this.partition(pokemons, 4)
     })
+  }
+
+  partition (data, n) {
+    return _.chain(data).groupBy((element, index) => Math.floor(index / n)).toArray().value()
   }
 
   render () {
@@ -41,15 +48,29 @@ export default class Pokedex extends Component {
           }
         </div>
         {
-          this.state.pokemons.map((pokemon, index) => (
-            <div key={ index } className='pokemon'>
-              <Link to={ `pokemon/${pokemon.name}` }>
-                <PokemonHeaderInformation id={ pokemon.id } name={ pokemon.name } species={ pokemon.species } />
-                <PokemonImage name={ pokemon.name } />
-              </Link>
-              <div className="text-center">
-                <PokemonType type={ pokemon.type } />
-              </div>
+          this.state.groupped.map((group, indexGroupped) => (
+            <div className='row' key={ indexGroupped }>
+              {
+                group.map((pokemon, indexGroup) => (
+                  <div className='col-lg-3' key={ indexGroup }>
+                        <div className="pokemon panel panel-primary">
+                          <div className="panel-heading">
+                            <PokemonHeaderInformation id={ pokemon.id } name={ pokemon.name } species={ pokemon.species } />
+                          </div>
+                          <div className="panel-body">
+                            <Link to={ `pokemon/${pokemon.name}` }>
+                              <PokemonImage name={ pokemon.name } />
+                            </Link>
+                          </div>
+                          <div className="panel-footer">
+                            <div className="text-center">
+                              <PokemonType type={ pokemon.type } />
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                ))
+              }
             </div>
           ))
         }
