@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 let _mainResource = 'app/data/pokemons.json';
+let _localStorage = window.localStorage
 let pokemons;
 
 export async function getPokemons () {
@@ -16,4 +17,16 @@ export async function getPokemonByName (name) {
 export async function getPokemonsByType (type) {
   pokemons = await getPokemons();
   return pokemons.filter(pokemon => pokemon.type.some(t => t === type ))
+}
+
+export getComments (pokemon) => {
+  var comments = _localStorage.getItem(pokemon)
+  (!comments) ? comments = [] : comments = JSON.parse(comments)
+  return comments
+}
+
+export saveComment (pokemon, comment) => {
+  let comments = this.getComments(pokemon)
+  comments.push(comment)
+  _localStorage.setItem(pokemon, JSON.stringify(comments))
 }
