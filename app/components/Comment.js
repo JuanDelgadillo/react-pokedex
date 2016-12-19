@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { getComments, saveComment } from '../utils/pokemonHelpers';
 
 class Comment extends Component {
   constructor () {
@@ -19,10 +20,18 @@ class Comment extends Component {
     this.addComment = this.addComment.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      comments: getComments(nextProps.pokemonName)
+    })
+  }
+
   addComment (event) {
     event.preventDefault();
     this.state.comment.date = new Date().toDateString();
     this.state.comments.push(this.state.comment);
+
+    saveComment(this.props.pokemonName, this.state.comment);
 
     this.setState({
       comments: this.state.comments,
@@ -49,7 +58,6 @@ class Comment extends Component {
   }
 
   toggle () {
-    console.log(this.state)
     this.setState({
       showComments: !this.state.showComments
     });

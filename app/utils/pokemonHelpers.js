@@ -20,13 +20,13 @@ export async function getPokemonsByType (type) {
 }
 
 export let getComments = (pokemon) => {
-  var comments = _localStorage.getItem(pokemon)
-  (!comments) ? comments = [] : comments = JSON.parse(comments)
+  let savedComments = _localStorage.getItem(pokemon)
+  let comments = (!savedComments) ? [] : JSON.parse(savedComments)
   return comments
 }
 
 export let saveComment = (pokemon, comment) => {
-  let comments = this.getComments(pokemon)
+  let comments = getComments(pokemon)
   comments.push(comment)
   _localStorage.setItem(pokemon, JSON.stringify(comments))
 }
