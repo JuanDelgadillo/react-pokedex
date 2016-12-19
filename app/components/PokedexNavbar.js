@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const PokedexNavbar = () => (
  <div className="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -10,10 +11,10 @@ const PokedexNavbar = () => (
           <span className="icon-bar"></span>
           <span className="icon-bar"></span>
         </button>
-        <a className="navbar-brand" href="/">
+        <Link to='/' className="navbar-brand">
           <img src="app/assets/images/logo.png" />
           Pokédex
-        </a>
+        </Link>
       </div>
     </div>
   </div>
